@@ -1,0 +1,31 @@
+import time
+from itertools import count
+from matplotlib.animation import FuncAnimation
+import matplotlib.pyplot as plt
+import random
+
+'''Example : There are two Funding teams(Team_A and Team B) and people
+   are donating money to the two teams, the donation is visualized 
+   in live'''
+
+
+plt.style.use('dark_background')
+c = count()
+
+indexes = []
+Donation_by_people_to_Team_A = []
+Donation_by_people_to_Team_B = []
+
+
+def live_data_plot(i):
+    indexes.append(next(c))
+    Donation_by_people_to_Team_A.append(random.uniform(1, 100))
+    Donation_by_people_to_Team_B.append(random.uniform(1, 100))
+    plt.cla()
+    plt.plot(indexes,Donation_by_people_to_Team_A,label='Team A')
+    plt.plot(indexes, Donation_by_people_to_Team_B,color='maroon', label='Team B', linestyle='-.')
+    plt.legend(loc='upper left')
+
+
+animation = FuncAnimation(plt.gcf(),live_data_plot,interval=1000) # 1 second = 1000
+plt.show()
